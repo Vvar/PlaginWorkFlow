@@ -1,6 +1,6 @@
 {
-    "name": "git@github.com:Vvar/plugin-work-flow.git",
-    "description": "state procedure 223",
+    "name": "ets/plugin-work-flow",
+    "description": "plugin manager work flow",
     "type": "library",
     "require": {
         "php": "~5.4.0",
