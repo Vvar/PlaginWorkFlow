@@ -1,6 +1,6 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State\ServiceLocator;
+namespace ETS\PluginWorkFlow\State;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -10,10 +10,12 @@ use Zend\EventManager\AbstractListenerAggregate;
 
 /**
  * Class AbstractFactoryState
- * @package ETS\FZ223\WorkFlow\State\ServiceLocator
+ * @package ETS\PluginWorkFlow\State
  */
 class AbstractFactoryState implements AbstractFactoryInterface
 {
+    const CLASS_NAME = 'ETS\PluginWorkFlow\State\AbstractFactoryState';
+
     /**
      * Алиас
      * @var string
@@ -31,6 +33,7 @@ class AbstractFactoryState implements AbstractFactoryInterface
     {
         return strpos($requestedName, $this->getAlias() . '_') === 0;
     }
+
 
     /**
      * @param ServiceLocatorInterface $serviceLocator

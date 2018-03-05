@@ -1,17 +1,19 @@
 <?php
 
-namespace ETS\FZ223\State\Options;
+namespace ETS\PluginWorkFlow\Options;
 
-use ETS\ActiveUser\Module;
+use ETS\PluginWorkFlow\Module;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class ModuleOptionsFactory
- * @package ETS\FZ223\State\Options
+ * @package ETS\PluginWorkFlow\Options
  */
 class ModuleOptionsFactory implements FactoryInterface
 {
+    const CLASS_NAME = 'ETS\PluginWorkFlow\Options\ModuleOptionsFactory';
+
     /**
      * Create service
      *

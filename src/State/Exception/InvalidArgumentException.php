@@ -1,10 +1,10 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State\Exception;
+namespace ETS\PluginWorkFlow\State\Exception;
 
 /**
  * Class InvalidArgumentException
- * @package ETS\FZ223\WorkFlow\State\Exception
+ * @package ETS\PluginWorkFlow\State\Exception
  */
 class InvalidArgumentException extends \InvalidArgumentException
 {

@@ -1,11 +1,9 @@
 <?php
 
-namespace ETS\FZ223;
+namespace ETS\PluginWorkFlow;
 
 use ETS\Classifier\Entity\Status\ProcedureStatus;
-use ETS\FZ223\WorkFlow\State;
-use ETS\FZ223\WorkFlow\Procedure;
-
+use ETS\PluginWorkFlow\Test\State\Object;
 
 /**
  *
@@ -14,10 +12,10 @@ use ETS\FZ223\WorkFlow\Procedure;
  *
  */
 return [
-    'procedure' => [
-        'class' => State\Procedure::CLASS_NAME,
+    'object' => [
+        'class' => Object::CLASS_NAME,
         'states' => [
-            ProcedureStatus::STATUS_DRAFT => Procedure\Draft::CLASS_NAME,
+            'draft' => Object\Draft::CLASS_NAME,
         ],
     ],
 ];

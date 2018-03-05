@@ -1,14 +1,14 @@
 <?php
 
-namespace ETS\PlaginWorkFlow\State;
+namespace ETS\PluginWorkFlow;
 
 
-use ETS\FZ223\WorkFlow\Procedure;
-use ETS\DeepCopy\Service\ServicePluginManager;
+use ETS\PluginWorkFlow\Options;
+use ETS\PluginWorkFlow\Service;
+
 
 return [
     'aliases' => [
-
     ],
 
     'invokables' => [
@@ -16,7 +16,8 @@ return [
     ],
 
     'factories' => [
-        Procedure\Draft::CLASS_NAME => Procedure\Factory\DraftFactory::CLASS_NAME,
+        Options\ModuleOptions::CLASS_NAME           => Options\ModuleOptionsFactory::CLASS_NAME,
+        Service\ServicePluginManager::CLASS_NAME    => Service\ServicePluginManagerFactory::CLASS_NAME,
     ],
 
     'initializers' => [

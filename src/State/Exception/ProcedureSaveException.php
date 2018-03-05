@@ -1,10 +1,10 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State\Exception;
+namespace ETS\PluginWorkFlow\State\Exception;
 
 /**
  * Class ProcedureSaveException
- * @package ETS\FZ223\WorkFlow\State\Exception
+ * @package ETS\PluginWorkFlow\State\Exception
  */
 class ProcedureSaveException extends RuntimeException
 {

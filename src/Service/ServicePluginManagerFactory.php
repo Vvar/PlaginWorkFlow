@@ -1,6 +1,6 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State\ServiceLocator;
+namespace ETS\PluginWorkFlow\Service;
 
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
@@ -10,6 +10,7 @@ use Zend\Mvc\Service\AbstractPluginManagerFactory;
  */
 class ServicePluginManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = 'ETS\FZ223\WorkFlow\Service\ServicePluginManager';
+    const CLASS_NAME = 'ETS\PluginWorkFlow\Service\ServicePluginManagerFactory';
 
+    const PLUGIN_MANAGER_CLASS = 'ETS\PluginWorkFlow\Service\ServicePluginManager';
 }

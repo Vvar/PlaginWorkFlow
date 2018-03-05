@@ -1,12 +1,12 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State;
+namespace ETS\PluginWorkFlow\State;
 
-use ETS\FZ223\WorkFlow\State\Exception;
+use ETS\PluginWorkFlow\State\Exception;
 
 /**
  * Class AbstractState
- * @package ETS\FZ223\WorkFlow\State
+ * @package ETS\PluginWorkFlow\State
  */
 class AbstractState
 {

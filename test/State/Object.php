@@ -1,18 +1,18 @@
 <?php
 
-namespace ETS\FZ223\WorkFlow\State;
+namespace ETS\PluginWorkFlow\Test\State;
 
+use ETS\PluginWorkFlow\Test\Entity\TestEntity;
 use ETS\Classifier\Repository\Status\ProcedureStatusRepository;
 use ETS\Common\Procedure\State\StateInterface;
-use ETS\FZ223\Entity\Procedure\Procedure as ProcedureEntity;
 
 /**
- * Class Procedure
- * @package ETS\FZ223\WorkFlow\State
+ * Class Object
+ * @package ETS\PluginWorkFlow\Test\State
  */
-class Procedure
+class Object
 {
-    const CLASS_NAME = 'ETS\FZ223\WorkFlow\State\Procedure';
+    const CLASS_NAME = 'ETS\PluginWorkFlow\Test\State\Object';
 
     /**
      * @var array
@@ -34,10 +34,10 @@ class Procedure
     }
 
     /**
-     * @param ProcedureEntity $procedure
+     * @param TestEntity $procedure
      * @param StateInterface|string $state
      */
-    public function move(ProcedureEntity $procedure, $state)
+    public function move(TestEntity $procedure, $state)
     {
 
         if (is_string($state)) {

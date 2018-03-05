@@ -1,15 +1,16 @@
 <?php
 
-namespace ETS\FZ223\State\Options;
+namespace ETS\PluginWorkFlow\Options;
 
 
 use Zend\Stdlib\AbstractOptions;
 
 /**
  * Class ModuleOptions
- * @package ETS\FZ223\State\Options
+ * @package ETS\PluginWorkFlow\Options
  */
 class ModuleOptions extends AbstractOptions
 {
+    const CLASS_NAME = 'ETS\PluginWorkFlow\Options\ModuleOptions';
 
 }

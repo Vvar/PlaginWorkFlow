@@ -4,27 +4,30 @@ namespace ETS\PluginWorkFlow;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\EventManager\EventInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Listener\ServiceListenerInterface;
+use ETS\PluginWorkFlow\Service\ServicePluginManager;
+use ETS\PluginWorkFlow\Service\ServiceConfigProviderInterface;
 
 /**
  * Class Module
- * @package ETS\FZ223\WorkFlow
+ * @package ETS\PluginWorkFlow
  */
 class Module implements
     BootstrapListenerInterface,
     ConfigProviderInterface,
     ServiceProviderInterface
 {
-    const CONFIG_KEY  = 'ets-fz223-state';
-
+    const CONFIG_KEY  = 'plugin-work-flow';
 
     /**
-     * @param EventInterface $e
+     * @param EventInterface | MvcEvent $e
      * @throws \Exception
+     * @return void
      */
     public function onBootstrap(EventInterface $e)
     {
@@ -42,11 +45,17 @@ class Module implements
         }
 
         $serviceListener->addServiceManager(
-            'ETS\DeepCopy\Service\ServicePluginManager',
+            ServicePluginManager::CLASS_NAME,
             ServicePluginManager::CONFIG_KEY,
-            'ETS\DeepCopy\Service\ServiceConfigProviderInterface',
+            ServiceConfigProviderInterface::CLASS_NAME,
             'getServiceConfig'
         );
+
+        $pluginWorkFlow = $serviceManager->get(Service\ServicePluginManager::CLASS_NAME);
+        $stateObject = $pluginWorkFlow->get('object');
+
+        $asd = 2;
+
     }
 
     /**
