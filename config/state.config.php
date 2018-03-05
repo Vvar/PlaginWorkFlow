@@ -12,7 +12,7 @@ use ETS\PluginWorkFlow\Test\State\Object;
  *
  */
 return [
-    'object' => [
+    'test' => [
         'class' => Object::CLASS_NAME,
         'states' => [
             'draft' => Object\Draft::CLASS_NAME,
