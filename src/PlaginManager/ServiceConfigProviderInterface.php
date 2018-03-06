@@ -1,14 +1,14 @@
 <?php
 
-namespace ETS\PluginWorkFlow\Service;
+namespace ETS\PluginWorkFlow\PluginManager;
 
 /**
  * Interface ServiceConfigProviderInterface
- * @package ETS\PluginWorkFlow\Service
+ * @package ETS\PluginWorkFlow\PluginManager
  */
 interface ServiceConfigProviderInterface
 {
-    const CLASS_NAME = 'ETS\PluginWorkFlow\Service\ServiceConfigProviderInterface';
+    const CLASS_NAME = 'ETS\PluginWorkFlow\PluginManager\ServiceConfigProviderInterface';
 
     /**
      * @return array

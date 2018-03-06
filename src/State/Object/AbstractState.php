@@ -1,13 +1,13 @@
 <?php
 
-namespace ETS\PluginWorkFlow\Test\State\Object;
+namespace ETS\PluginWorkFlow\State\Object;
 
 
 use  ETS\PluginWorkFlow\Test\Entity\TestEntity;
 
 /**
  * Class AbstractState
- * @package ETS\PluginWorkFlow\Test\State\Object
+ * @package ETS\PluginWorkFlow\State\Object
  */
 abstract class AbstractState
 {
@@ -22,4 +22,10 @@ abstract class AbstractState
     public function __construct()
     {
     }
+
+    /**
+     * Смена статуса
+     * @return mixed
+     */
+    abstract public function move();
 }

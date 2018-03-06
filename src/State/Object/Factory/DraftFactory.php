@@ -1,10 +1,10 @@
 <?php
 
-namespace ETS\PluginWorkFlow\Test\State\Object\Factory;
+namespace ETS\PluginWorkFlow\State\Object\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use ETS\PluginWorkFlow\Test\State\Object\Draft;
+use ETS\PluginWorkFlow\State\Object\Draft;
 
 /**
  * Class DraftFactory

@@ -3,7 +3,8 @@
 namespace ETS\PluginWorkFlow;
 
 use ETS\Classifier\Entity\Status\ProcedureStatus;
-use ETS\PluginWorkFlow\Test\State\Object;
+
+use ETS\PluginWorkFlow\State\Object\Draft;
 
 /**
  *
@@ -13,9 +14,8 @@ use ETS\PluginWorkFlow\Test\State\Object;
  */
 return [
     'test' => [
-        'class' => Object::CLASS_NAME,
         'states' => [
-            'draft' => Object\Draft::CLASS_NAME,
-        ],
+            'draft' => Draft::CLASS_NAME,
+        ]
     ],
 ];

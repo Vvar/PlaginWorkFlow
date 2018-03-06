@@ -1,6 +1,6 @@
 <?php
 
-namespace ETS\PluginWorkFlow\Service;
+namespace ETS\PluginWorkFlow\PluginManager;
 
 use ETS\PluginWorkFlow\State\AbstractState;
 use Zend\ServiceManager\AbstractPluginManager;
@@ -8,11 +8,11 @@ use Zend\ServiceManager\Exception;
 
 /**
  * Class ServicePluginManager
- * @package ETS\FZ223\WorkFlow\Service
+ * @package ETS\PluginWorkFlow\PluginManager
  */
 class ServicePluginManager extends AbstractPluginManager
 {
-    const CLASS_NAME = 'ETS\PluginWorkFlow\Service\ServicePluginManager';
+    const CLASS_NAME = 'ETS\PluginWorkFlow\PluginManager\ServicePluginManager';
     
     /**
      * Имя секции в конфига приложения отвечающей за настройки менеджера

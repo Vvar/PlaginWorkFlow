@@ -2,10 +2,9 @@
 
 namespace ETS\PluginWorkFlow;
 
-use ETS\PluginWorkFlow\Service\ServicePluginManager;
-use ETS\PluginWorkFlow\State\AbstractFactoryState;
-
-use ETS\PluginWorkFlow\Test\State\Object;
+use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
+use ETS\PluginWorkFlow\Service\AbstractFactoryState;
+use ETS\PluginWorkFlow\State\Object;
 
 return [
     Module::CONFIG_KEY => [

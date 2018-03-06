@@ -3,35 +3,44 @@
 namespace ETS\PluginWorkFlow;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\EventManager\EventInterface;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Listener\ServiceListenerInterface;
-use ETS\PluginWorkFlow\Service\ServicePluginManager;
-use ETS\PluginWorkFlow\Service\ServiceConfigProviderInterface;
+use Zend\ModuleManager\Feature\InitProviderInterface;
+use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleManagerInterface;
+use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
+use ETS\PluginWorkFlow\PluginManager\ServiceConfigProviderInterface;
+
 
 /**
  * Class Module
  * @package ETS\PluginWorkFlow
  */
 class Module implements
-    BootstrapListenerInterface,
+    InitProviderInterface,
     ConfigProviderInterface,
     ServiceProviderInterface
 {
+
     const CONFIG_KEY  = 'plugin-work-flow';
 
     /**
-     * @param EventInterface | MvcEvent $e
-     * @throws \Exception
+     * Initialize workflow
+     *
+     * @param  ModuleManagerInterface $manager
      * @return void
+     * @throws \Exception
      */
-    public function onBootstrap(EventInterface $e)
+    public function init(ModuleManagerInterface $manager)
     {
-        $serviceManager = $e->getApplication()->getServiceManager();
+        if (!$manager instanceof ModuleManager) {
+            $errMsg = sprintf('Module manager not implement %s', 'Zend\ModuleManager\ModuleManager');
+            throw new \Exception($errMsg);
+        }
+
+        /** @var ServiceLocatorInterface $sm */
+        $serviceManager = $manager->getEvent()->getParam('ServiceManager');
         if (!$serviceManager instanceof ServiceLocatorInterface) {
             $errMsg = sprintf('Service locator not implement %s', 'Zend\ServiceManager\ServiceLocatorInterface');
             throw new \Exception($errMsg);
@@ -50,12 +59,6 @@ class Module implements
             ServiceConfigProviderInterface::CLASS_NAME,
             'getServiceConfig'
         );
-
-        $pluginWorkFlow = $serviceManager->get(Service\ServicePluginManager::CLASS_NAME);
-        $stateObject = $pluginWorkFlow->get('object');
-
-        $asd = 2;
-
     }
 
     /**

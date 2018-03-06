@@ -1,6 +1,6 @@
 <?php
 
-namespace ETS\PluginWorkFlow\State;
+namespace ETS\PluginWorkFlow\Service;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -10,11 +10,11 @@ use Zend\EventManager\AbstractListenerAggregate;
 
 /**
  * Class AbstractFactoryState
- * @package ETS\PluginWorkFlow\State
+ * @package ETS\PluginWorkFlow\Service
  */
 class AbstractFactoryState implements AbstractFactoryInterface
 {
-    const CLASS_NAME = 'ETS\PluginWorkFlow\State\AbstractFactoryState';
+    const CLASS_NAME = 'ETS\PluginWorkFlow\Service\AbstractFactoryState';
 
     /**
      * Алиас
@@ -45,13 +45,7 @@ class AbstractFactoryState implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $packetName = substr_replace($requestedName, '', 0, strlen($this->getAlias()) + 1);
-        /** @var ModuleOptions $moduleOptions */
-        $moduleOptions = $serviceLocator->get('ETS\FZ223\Options\ModuleOptions');
-        $eventListener = $moduleOptions->getEventListener();
 
-        if (!array_key_exists($packetName, $eventListener)) {
-            throw new \Exception("Пакет \{{$packetName}\} не описан в конфиге.");
-        }
 
         $stateClass = isset($eventListener[$packetName]['class']) ? $eventListener[$packetName]['class'] : null;
 
