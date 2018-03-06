@@ -2,21 +2,29 @@
 
 namespace ETS\PluginWorkFlow\State\Object;
 
-use ETS\Classifier\Entity\Status\ProcedureStatus;
+use ETS\PluginWorkFlow\State\Entity\TestEntity;
+use ETS\PluginWorkFlow\State\StateInterface;
 
 /**
  * Class Draft
  * @package ETS\PluginWorkFlow\Test\State\Object
  */
-class Draft extends AbstractState
+class Draft implements StateInterface
 {
 
     const CLASS_NAME = 'ETS\PluginWorkFlow\Test\State\Object\Draft';
 
-    /**
-     * @return void
-     */
-    public function move()
+    public function __construct()
     {
+
+    }
+
+    public function move($object, $status)
+    {
+        if (!$object instanceof TestEntity) {
+            throw new \Exception("", 500);
+        }
+
+        $object->setStatus($status);
     }
 }

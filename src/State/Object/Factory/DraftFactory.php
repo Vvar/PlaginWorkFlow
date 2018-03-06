@@ -22,8 +22,6 @@ class DraftFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('config');
-
         return new Draft();
     }
 }

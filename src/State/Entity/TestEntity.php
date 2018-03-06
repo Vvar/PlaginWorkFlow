@@ -11,5 +11,23 @@ use ETS\Common\Procedure\State\StateInterface;
  */
 class TestEntity
 {
+    protected $status;
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
 
 }

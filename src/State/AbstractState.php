@@ -3,13 +3,16 @@
 namespace ETS\PluginWorkFlow\State;
 
 use ETS\PluginWorkFlow\State\Exception;
+use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
 
 /**
  * Class AbstractState
  * @package ETS\PluginWorkFlow\State
  */
-class AbstractState
+abstract class AbstractState
 {
+    protected $exceptionInvalid = 'Invalid object type passed.';
+
     /**
      * @var
      */
@@ -21,40 +24,51 @@ class AbstractState
     protected $states = [];
 
     /**
-     * Procedure constructor.
+     * AbstractState constructor.
+     * @param ServicePluginManager $servicePluginManager
      * @param array $states
-     * @throws Exception\InvalidArgumentException
      */
     public function __construct(
-        array $states = []
+        ServicePluginManager $servicePluginManager,
+        array $states
     ) {
-        if (!is_array($states)) {
-            throw new Exception\InvalidArgumentException('Argument $states must be a array.', 500);
-        }
-
+        $this->servicePluginManager = $servicePluginManager;
         $this->states = $states;
     }
 
     /**
      * @param $object
-     * @param $state
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\NotFoundException
+     * @param $status
+     * @throws \Exception
      */
-    public function move($object, $state)
+    public function move($object, $status)
     {
-        if (!is_string($state)) {
-            throw new Exception\InvalidArgumentException('Argument $state must be a string.', 500);
+        $this->setObject($object);
+
+        if (!array_key_exists($status, $this->states)) {
+            throw new \Exception("Статус не найден");
         }
+        $state = $this->servicePluginManager->get($this->states[$status]);
 
-        if (array_key_exists($state, $this->states)) {
-            throw new Exception\NotFoundException('State not found.', 500);
-        }
-
-        if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException('Argument $object must be a object.', 500);
-        }
-
-
+        $state->move($object, $status);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * @param mixed $object
+     */
+    public function setObject($object)
+    {
+        $this->objectInstanceOf($object);
+        $this->object = $object;
+    }
+
+    abstract public function objectInstanceOf($object);
 }

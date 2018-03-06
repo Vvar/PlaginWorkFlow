@@ -12,5 +12,5 @@ class ServicePluginManagerFactory extends AbstractPluginManagerFactory
 {
     const CLASS_NAME = 'ETS\PluginWorkFlow\PluginManager\ServicePluginManagerFactory';
 
-    const PLUGIN_MANAGER_CLASS = 'ETS\PluginWorkFlow\Service\ServicePluginManager';
+    const PLUGIN_MANAGER_CLASS = 'ETS\PluginWorkFlow\PluginManager\ServicePluginManager';
 }

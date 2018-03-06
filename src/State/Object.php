@@ -2,48 +2,22 @@
 
 namespace ETS\PluginWorkFlow\State;
 
-use ETS\Classifier\Entity\Status\ProcedureStatus;
-use ETS\PluginWorkFlow\Service\ServicePluginManager;
+use ETS\PluginWorkFlow\State\Entity\TestEntity;
 
 /**
  * Class Object
  * @package ETS\PluginWorkFlow\State
  */
-class Object
+class Object extends AbstractState
 {
     /**
-     * @var array
-     */
-    protected $states = [];
-
-    /**
-     * @var ServicePluginManager
-     */
-    protected $servicePluginManager;
-
-    /**
-     * Object constructor.
-     * @param $servicePluginManager
-     */
-    public function __construct(
-        ServicePluginManager $servicePluginManager,
-        $states
-    ) {
-        $this->servicePluginManager = $servicePluginManager;
-        $this->states = $states;
-    }
-
-    /**
      * @param $object
-     * @param $status
-     * @throws \Exception
+     * @throws Exception\InvalidArgumentException
      */
-    public function move($object, $status)
+    public function objectInstanceOf($object)
     {
-        if (!array_key_exists($status, $this->states)) {
-            throw new \Exception("Статус не найден");
+        if (!$object instanceof TestEntity) {
+            throw new Exception\InvalidArgumentException($this->exceptionInvalid, 500);
         }
-        $state = $this->servicePluginManager->get($this->states[$status]);
-        $state->move($object);
     }
 }

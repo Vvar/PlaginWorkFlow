@@ -47,6 +47,7 @@ class AbstractFactoryState implements AbstractFactoryInterface
         $packetName = substr_replace($requestedName, '', 0, strlen($this->getAlias()) + 1);
 
 
+
         $stateClass = isset($eventListener[$packetName]['class']) ? $eventListener[$packetName]['class'] : null;
 
         $state = $serviceLocator->get($stateClass);
