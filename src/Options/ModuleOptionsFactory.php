@@ -5,6 +5,7 @@ namespace ETS\PluginWorkFlow\Options;
 use ETS\PluginWorkFlow\Module;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\AbstractPluginManager;
 
 /**
  * Class ModuleOptionsFactory
@@ -22,6 +23,9 @@ class ModuleOptionsFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            $serviceLocator = $serviceLocator->getServiceLocator();
+        }
         $config = $serviceLocator->get('config');
         $config = array_key_exists(Module::CONFIG_KEY, $config) ? $config[Module::CONFIG_KEY] : [];
         return new ModuleOptions($config);

@@ -4,9 +4,11 @@ namespace ETS\PluginWorkFlow\Service;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use ETS\FZ223\Options\ModuleOptions;
-use ETS\FZ223\Service\Event\ProcedureEventService;
 use Zend\EventManager\AbstractListenerAggregate;
+use ETS\PluginWorkFlow\Options\ModuleOptions;
+use Zend\ServiceManager\AbstractPluginManager;
+use ETS\PluginWorkFlow\State\State;
+use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
 
 /**
  * Class AbstractFactoryState
@@ -31,6 +33,7 @@ class AbstractFactoryState implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
+
         return strpos($requestedName, $this->getAlias() . '_') === 0;
     }
 
@@ -39,20 +42,26 @@ class AbstractFactoryState implements AbstractFactoryInterface
      * @param ServiceLocatorInterface $serviceLocator
      * @param $name
      * @param $requestedName
-     * @return AbstractListenerAggregate
+     * @return State
      * @throws \Exception
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $packetName = substr_replace($requestedName, '', 0, strlen($this->getAlias()) + 1);
 
+        $moduleOptions = $this->getModuleOptions($serviceLocator);
 
+        $states = !empty($moduleOptions->getState()[$name]) ? $moduleOptions->getState()[$name] : null;
 
-        $stateClass = isset($eventListener[$packetName]['class']) ? $eventListener[$packetName]['class'] : null;
+        if ($states === null) {
+            throw new \Exception("States not found.", 500);
+        }
 
-        $state = $serviceLocator->get($stateClass);
+        if (!$serviceLocator instanceof ServicePluginManager) {
+            throw new \Exception('Invalid parameter type.', 500);
+        }
 
-        return $state;
+        return new State($serviceLocator, $states);
     }
 
 
@@ -72,5 +81,17 @@ class AbstractFactoryState implements AbstractFactoryInterface
     {
         $this->alias = $alias;
         return $this;
+    }
+
+    /**
+     * @param $serviceLocator
+     * @return ModuleOptions
+     */
+    protected function getModuleOptions($serviceLocator)
+    {
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            $serviceLocator = $serviceLocator->getServiceLocator();
+        }
+        return $serviceLocator->get(ModuleOptions::CLASS_NAME);
     }
 }

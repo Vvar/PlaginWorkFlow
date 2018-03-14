@@ -16,8 +16,8 @@ return [
     ],
 
     'factories' => [
-        Options\ModuleOptions::CLASS_NAME           => Options\ModuleOptionsFactory::CLASS_NAME,
-        PluginManager\ServicePluginManager::CLASS_NAME    => PluginManager\ServicePluginManagerFactory::CLASS_NAME,
+        Options\ModuleOptions::CLASS_NAME                   => Options\ModuleOptionsFactory::CLASS_NAME,
+        PluginManager\ServicePluginManager::CLASS_NAME      => PluginManager\ServicePluginManagerFactory::CLASS_NAME,
     ],
 
     'initializers' => [

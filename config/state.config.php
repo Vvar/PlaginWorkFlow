@@ -13,9 +13,9 @@ use ETS\PluginWorkFlow\State\Object\Draft;
  *
  */
 return [
+
     'test' => [
-        'states' => [
-            'draft' => Draft::CLASS_NAME,
-        ]
+        'draft' => Draft::CLASS_NAME,
+        'public' => '',
     ],
 ];

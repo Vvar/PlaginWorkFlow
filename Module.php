@@ -2,6 +2,7 @@
 
 namespace ETS\PluginWorkFlow;
 
+use ETS\PluginWorkFlow\State\Entity\TestEntity;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -11,6 +12,9 @@ use Zend\ModuleManager\ModuleManager;
 use Zend\ModuleManager\ModuleManagerInterface;
 use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
 use ETS\PluginWorkFlow\PluginManager\ServiceConfigProviderInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\EventManager\EventInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 
 
 /**
@@ -18,12 +22,28 @@ use ETS\PluginWorkFlow\PluginManager\ServiceConfigProviderInterface;
  * @package ETS\PluginWorkFlow
  */
 class Module implements
+    BootstrapListenerInterface,
     InitProviderInterface,
     ConfigProviderInterface,
     ServiceProviderInterface
 {
 
     const CONFIG_KEY  = 'plugin-work-flow';
+
+
+    /**
+     * @param EventInterface | MvcEvent $e
+     * @throws \Exception
+     * @return void
+     */
+    public function onBootstrap(EventInterface $e)
+    {
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $workFlowPluginManager = $serviceManager->get('workFlowPluginManager');
+        $stateTest = $workFlowPluginManager->get('state_test');
+        $test = new TestEntity();
+        $stateTest->move(new TestEntity(), 'draft');
+    }
 
     /**
      * Initialize workflow
@@ -59,6 +79,11 @@ class Module implements
             ServiceConfigProviderInterface::CLASS_NAME,
             'getServiceConfig'
         );
+
+//        $workFlowPluginManager = $serviceLocator->get('workFlowPluginManager');
+//        $stateTest = $workFlowPluginManager->get('state_test');
+//        $test = new TestEntity();
+//        $stateTest->move(new TestEntity(), 'draft');
     }
 
     /**

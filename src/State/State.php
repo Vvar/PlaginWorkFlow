@@ -6,17 +6,11 @@ use ETS\PluginWorkFlow\State\Exception;
 use ETS\PluginWorkFlow\PluginManager\ServicePluginManager;
 
 /**
- * Class AbstractState
+ * Class State
  * @package ETS\PluginWorkFlow\State
  */
-abstract class AbstractState
+class State
 {
-    protected $exceptionInvalid = 'Invalid object type passed.';
-
-    /**
-     * @var
-     */
-    protected $object;
 
     /**
      * @var array
@@ -43,32 +37,11 @@ abstract class AbstractState
      */
     public function move($object, $status)
     {
-        $this->setObject($object);
-
         if (!array_key_exists($status, $this->states)) {
-            throw new \Exception("Статус не найден");
+            throw new \Exception("Статус не найден", 500);
         }
         $state = $this->servicePluginManager->get($this->states[$status]);
-
         $state->move($object, $status);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getObject()
-    {
-        return $this->object;
-    }
-
-    /**
-     * @param mixed $object
-     */
-    public function setObject($object)
-    {
-        $this->objectInstanceOf($object);
-        $this->object = $object;
-    }
-
-    abstract public function objectInstanceOf($object);
 }
